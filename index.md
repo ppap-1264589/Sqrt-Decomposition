@@ -21,11 +21,14 @@ Thao tác "duỗi cây" tìm giá trị cho các con trỏ có thể được c�
 
 Ta có Out[u] = max(Out[u], Out[v]) với v là các đỉnh trong cây con gốc u. Hay nói cách khác, Out[u] là giá trị con trỏ phải lớn nhất đạt được khi thăm từ đỉnh u xuống cây DFS
 
+Đồng thời lưu luôn một mảng node[], với ý nghĩa node[pos] là tên của đỉnh tại con trỏ pos
 ```c++
 int tdfs;
+int in[maxn], out[maxn];
+int node[maxn] // lưu lại tên của đỉnh tại vị trí con trỏ
 int DFS(int u, int parrent){
     in[u] = out[u] = ++tdfs;
-    node[tdfs] = u;
+    node[u] = tdfs;
     for (int v : a[u]){
         if (v != parrent) out[u] = max(out[u], DFS(v, u));
     }
@@ -41,7 +44,8 @@ Tiến hành ép các thông tin vào struct và sort các truy vấn theo quy t
 
 Sau đó xây dựng một số mảng quan trọng:
 
-- C[u] là màu của đỉnh u
+- Gọi pos là vị trí của con trỏ đang xét 
+    -> tên của đỉnh đang xét là u = node[pos]
 
 - Gọi cnt[C[u]] là số lần xuất hiện màu C[u]
 
