@@ -28,7 +28,7 @@ int in[maxn], out[maxn];
 int node[maxn] // lưu lại tên của đỉnh tại vị trí con trỏ
 int DFS(int u, int parrent){
     in[u] = out[u] = ++tdfs;
-    node[u] = tdfs;
+    node[tdfs] = u;
     for (int v : a[u]){
         if (v != parrent) out[u] = max(out[u], DFS(v, u));
     }
